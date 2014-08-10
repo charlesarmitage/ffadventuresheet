@@ -1,0 +1,42 @@
+body {
+	background-image: url(../images/parchment.jpg);
+	background-size: 100%;
+}
+
+li, h1, h2, h3, h4, h5, h6 {
+	font-family: 'Architects Daughter', cursive;
+}
+
+p {
+	font-family: 'Architects Daughter', cursive;
+}
+
+label, button {
+	font-family: 'Architects Daughter', cursive;
+}
+
+.navbar, .nav-tabs, .page-header, .jumbotron, .well, .container {
+	background-image: none;
+	background-color: rgba(228,191,146,0.7);
+	margin-bottom:0;
+}
+
+.nav.nav-tabs.nav-justified::before {
+	background-image: none;
+	background-color: rgb(228,191,146);	
+}
+
+.stat-name, .panel, .panel-heading, .panel-default {
+	background-image: none;
+	background-color: rgba(228,191,146,0.7);
+}
+
+.form-control {
+	background-color: rgba(228,191,146,0.7);
+}
+
+.btn-default {
+	color: white;
+	background-image: none;
+	background-color: rgb(215,162,96);
+}
