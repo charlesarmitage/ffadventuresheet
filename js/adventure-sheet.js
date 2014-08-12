@@ -62,6 +62,13 @@ var AdventureSheetViewModel = (function() {
 
 	function endBattle(){
 		fightResult('Edit new monster');
+		$('#defeated-monster-list').show('blind');
+		$('#monster-edit-dialog').hide('blind');
+	    $('#fight-dialog').hide('blind');
+	};
+
+	this.editMonster = function(){
+		$('#defeated-monster-list').hide('blind');
 		$('#monster-edit-dialog').show('blind');
 	    $('#fight-dialog').hide('blind');
 	};
@@ -70,6 +77,7 @@ var AdventureSheetViewModel = (function() {
 	this.fightMonster = function(){
 		fightResult('Battle started!')
 		ff.monsters.currentMonster.fight();
+		$('#defeated-monster-list').hide('blind');
 		$('#monster-edit-dialog').hide('blind');
 	    $('#fight-dialog').show('blind');
 	};

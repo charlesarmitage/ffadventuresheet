@@ -1,13 +1,14 @@
 body {
-	background-image: url(../images/parchment.jpg);
+	background-color: rgb(228,191,146);
 	background-size: 100%;
+	border-color: white;
 }
 
 li, h1, h2, h3, h4, h5, h6 {
 	font-family: 'Architects Daughter', cursive;
 }
 
-p {
+b, p {
 	font-family: 'Architects Daughter', cursive;
 }
 
@@ -15,9 +16,56 @@ label, button {
 	font-family: 'Architects Daughter', cursive;
 }
 
-.navbar, .nav-tabs, .page-header, .jumbotron, .well, .container {
+small, a {
+	color: white;
+	color: inherit;
+}
+
+.form-control {
+	border-color: white;
+}
+
+#app-body {
+	padding-top: 10px;
+}
+
+#adventurer-name {
+	font-size: 24px;
+}
+
+#adventure-header {
+	background-color: rgb(205,133,63);
+}
+
+.subtext {
+	font-size: 65%;
+}
+
+.navbar-default {
+	color: white;
 	background-image: none;
-	background-color: rgba(228,191,146,0.7);
+	background-color: rgb(205,133,63);
+	border-radius: 0px;
+	border-width: 0px;
+	padding: 15px;
+	margin-bottom:0;
+}
+
+.navbar-toggle {
+	border-color: white;
+}
+
+.navbar-default .navbar-nav>li>a {
+	color: white;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+	background-color: white;
+}
+
+.nav-tabs, .page-header, .jumbotron, .well, .container {
+	background-image: none;
+	background-color: rgb(228,191,146);
 	margin-bottom:0;
 }
 
@@ -26,17 +74,29 @@ label, button {
 	background-color: rgb(228,191,146);	
 }
 
-.stat-name, .panel, .panel-heading, .panel-default {
+i {
+	color: white;
+}
+
+.list-group-item, .stat-name, .panel, .panel-heading, .panel-default {
 	background-image: none;
-	background-color: rgba(228,191,146,0.7);
+	background-color: rgb(228,191,146);
+	border-color: white;
 }
 
 .form-control {
-	background-color: rgba(228,191,146,0.7);
+	background-color: rgb(228,191,146);
 }
 
 .btn-default {
 	color: white;
 	background-image: none;
 	background-color: rgb(215,162,96);
+	border-color: white;
+}
+
+.btn-default:active, .btn-default:hover, .btn-default:visited {
+	background-image: none;
+	background-color: white;
+	border-color: white;
 }

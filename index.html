@@ -11,15 +11,21 @@
 		<link rel="stylesheet" href="css/adventure-sheet.css">
 	</head>
 	<body>
-		<div class="container">
-
 
 		<nav class="navbar navbar-default" role="navigation">
+			<div id="adventure-header" class="container">
+
   			<div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
     			<div class="navbar-header">
     				<h3>
-    				<span data-bind="text: 'Name: ' + adventurer.name(), click: adventurer.editName">Name: </span>
+    				Name:
+    				<span id="adventurer-name"
+    					  data-bind="visible: !adventurer.isNameEditable(), text: adventurer.name(), click: adventurer.editName"></span>
+
+    				<div data-bind="visible: adventurer.isNameEditable">
+    				<input class="form-control" placeholder="Click to add name"
+								data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
+					</div>
 
     				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
     				<span class="sr-only">Toggle navigation</span>
@@ -27,8 +33,9 @@
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
     				</button>
-
-    				<p><small>Click name to change name</small></p>
+    				<div class="subtext">
+    					Click name to change name
+    				</div>
     				</h3>
     			</div>
 
@@ -42,36 +49,46 @@
 	        		</ul>
         		</div>
     		</div>
+
+    		</div>
     	</nav>
 
+    <div id="app-body" class="container">
 
     <div id="my-tab-content" class="tab-content">
 
         <div class="tab-pane active" id="Statistics">
-				<h3>Statistics
-				<button class="btn btn-default pull-right" data-bind="click: resetStats">Reset!</button>
-        		<button class="btn btn-default pull-right" data-bind="click: startAdventure">Start!</button>
-				</h3>
+        	<div class="row">
+				<div class="col-xs-4">
+					<h4>Statistics</h4>
+				</div>
+				<div class="col-xs-8 btn-group pull-right">
+					<button class="btn btn-default" data-bind="click: resetStats">Reset!</button>
+	        		<button class="btn btn-default" data-bind="click: startAdventure">Start!</button>	
+         	        <button class="btn btn-default" data-bind="">
+						<span>Try Luck</span>
+					</button>
+        		</div>
+			</div>
 		    <div class="row" data-bind="foreach: adventurer.statistics">
 		    	<div class="col-md-4">
 		        <div class="panel panel-default">
 					<div class="panel-body">
 			          <h4>
 			          	  <span data-bind="text: name"></span>
-				          <div class="btn-group  btn-group pull-right">
+				          <div class="btn-group pull-right">
 		        			<button class="btn btn-default" data-bind="click: incrementStatistic">
 		        				<span class="glyphicon glyphicon-plus"></span>
 		        			</button>
 		        			<button class="btn btn-default" data-bind="click: decrementStatistic">
 		        				<span class="glyphicon glyphicon-minus"></span>
 		        			</button>
-		        			<!--button class="btn btn-default" data-bind="visible: function(){ return name == 'Luck'; }">
-		        				<span>Try Luck</span>
-		        			</button-->
+
 		        		  </div>			          	
 			          </h4>
 			          <p>Initial: <span data-bind="text: initialValue"></span></p>
 			          <h4>Current: <span data-bind="text: currentValue"></span></h4>
+
 					</div>
 				</div>
 				</div>
@@ -190,10 +207,28 @@
        </div>
 
         <div class="tab-pane" id="Fights">
-			<h3>Fight: <span data-bind="text: fightResult"></span></h3>
+			
 	    <div class="panel panel-default">
+
+			<div id="defeated-monster-list"
+				 class="panel-body">
+				 	<button class="btn btn-default" data-bind="click: this.editMonster">
+	            	Fight New Monster
+	            	</button>
+				<h3 data-bind="visible: function(){ return monsters.defeatedMonsters.length > 0; }">Defeated Monsters</h3>
+			    <ul class="list-group" data-bind="foreach: { data: monsters.defeatedMonsters, as: 'monster' }">
+					<li class="list-group-item">
+						<span data-bind="text: 'Name: ' + monster.name + ', '"></span>
+			        	<span>Skill: </span><span data-bind="text: monster.skill"></span>
+			        	<span>Stamina: </span><span data-bind="text: monster.stamina"></span>
+						<i class="glyphicon glyphicon-remove pull-right"
+							data-bind="click: function(){ monsters.defeatedMonsters.splice($index, 1) }"></i>
+					</li>
+				</ul>
+			</div>
 		    <div id="monster-edit-dialog"
-		    	class="panel-body">
+		    	class="panel-body"
+		    	style="display: none">
 	            <h3>Edit Monster</h3>
 	            <b>
 	            <span>Name: </span>
@@ -211,6 +246,7 @@
 		   	<div id="fight-dialog" 
 		   		class="panel-body"
 		   		style="display: none;">
+		   		<h3>Fight: <span data-bind="text: fightResult"></span></h3>
 		   		<div class="row">
 		   			<div class="panel panel-default col-md-6">
 				   		<div class="panel-body">
@@ -236,18 +272,6 @@
 		    </div>
 		</div>
 
-		<h3>Defeated Monsters</h3>
-	    <ul class="list-group" data-bind="foreach: { data: monsters.defeatedMonsters, as: 'monster' }">
-			<li class="list-group-item">
-				<span data-bind="text: 'Name: ' + monster.name + ', '"></span>
-	        	<span>Skill: </span><span data-bind="text: monster.skill"></span>
-	        	<span>Stamina: </span><span data-bind="text: monster.stamina"></span>
-				<button class="pull-right" data-bind="click: function(){ monsters.defeatedMonsters.splice($index, 1) }">
-					<i class="glyphicon glyphicon-remove"></i>
-				</button>
-			</li>
-		</ul>
-
         </div>
 
         <div class="tab-pane" id="Dice">
@@ -262,8 +286,7 @@
 			<h4>Adventurer: <span data-bind="text: name"></span></h4>
 			<div class="row">
 			<div class="col-md-3">
-			<input class="form-control" placeholder="Click to add name"
-					data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
+
 			</div>
 			<h4>
 				<div class="ff-stats-bar">
@@ -307,4 +330,3 @@
 	
 	</body>
 </html>
-
