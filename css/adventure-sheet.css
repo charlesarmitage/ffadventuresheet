@@ -2,6 +2,7 @@ body {
 	background-color: rgb(228,191,146);
 	background-size: 100%;
 	border-color: white;
+	padding-top: 60px;
 }
 
 li, h1, h2, h3, h4, h5, h6 {
