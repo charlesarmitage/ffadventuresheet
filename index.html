@@ -54,10 +54,8 @@
     		</div>
     	</nav>
 
-    <div id="app-body" class="container">
-
-    <div id="adventurer-name-input">
-		<div class="input-group" data-bind="visible: adventurer.isNameEditable">
+	<div id="adventurer-name-input" class="container" data-bind="visible: adventurer.isNameEditable">
+ 		<div class="input-group">
 			<input class="form-control" 
 					placeholder="Click to add name"
 					data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
@@ -65,6 +63,8 @@
 				  data-bind="click: adventurer.isNameEditable(false)">Set</span>
 		</div>
 	</div>
+
+    <div id="app-body" class="container">
 
     <div id="my-tab-content" class="tab-content">
 
@@ -79,6 +79,17 @@
 					<button class="btn btn-default" data-bind="click: resetStats">Reset</button>
         		</div>
 			</div>
+
+			<div class="panel panel-default" data-bind="visible: luckResult().length">
+				<div class="panel-body">
+					<h4>
+						<span data-bind="text:luckResult"></span>
+						<i class="glyphicon glyphicon-remove pull-right"
+							data-bind="click: function(){ luckResult(''); }"></i>
+					</h4>
+				</div>
+			</div>
+
 		    <div class="row" data-bind="foreach: adventurer.statistics">
 		    	<div class="col-md-4">
 		        <div class="panel panel-default">
@@ -248,9 +259,8 @@
 	            <span>Stamina: </span>
 	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.stamina.currentValue" />
 	            </b>
-	            <button class="btn btn-default" data-bind="click: this.fightMonster">
-	            Start
-	            </button>
+	            <button class="btn btn-default" data-bind="click: this.fightMonster">Start</button>
+	            <button class="btn btn-default" data-bind="click: this.cancelMonsterEdit">Cancel</button>
 		    </div>
 		   	<div id="fight-dialog" 
 		   		class="panel-body"
