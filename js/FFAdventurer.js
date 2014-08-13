@@ -122,5 +122,12 @@ var ff = (function(ff){
 		adventurer.updateViewModel(adventurer.lastRoundResult.adventurer);
 	};
 
+	adventurer.testLuck = function(){
+		var currentLuck = adventurer.luck.currentValue();
+		adventurer.luck.currentValue(currentLuck - 1);
+
+		return currentLuck >= ff.dice.rollTwoDice().result;
+	}
+
 	return ff;
 }(ff || {}));

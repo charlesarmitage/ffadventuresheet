@@ -17,30 +17,31 @@
 
   			<div class="container-fluid">
     			<div class="navbar-header">
-    				<h3>
-    				Name:
-    				<span id="adventurer-name"
-    					  data-bind="visible: !adventurer.isNameEditable(), text: adventurer.name(), click: adventurer.editName"></span>
+    				<span class="navbar-brand" data-bind="click: adventurer.editName">
+	    				<span>Name:</span>
+	    				<span id="adventurer-name"
+	    					  data-bind="visible: !adventurer.isNameEditable(), 
+	    					  				text: adventurer.name(),
+	    					  				click: adventurer.editName">
+	    				</span>
+	    				 <span class="subtext" data-bind="visible: adventurer.name().length == 0,
+												click: adventurer.editName">
+							Click to set
+						</span>
+	    			</span>
 
-    				<div data-bind="visible: adventurer.isNameEditable">
-    				<input class="form-control" placeholder="Click to add name"
-								data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
-					</div>
-
-    				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+    				<button type="button" class="navbar-toggle navbar-right navbar-btn" 
+    									  data-toggle="collapse" 
+    									  data-target="#bs-example-navbar-collapse-1">
     				<span class="sr-only">Toggle navigation</span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
     				</button>
-    				<div class="subtext">
-    					Click name to change name
-    				</div>
-    				</h3>
     			</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      			<ul class="nav navbar-nav" data-tabs="tabs">
+	      			<ul class="nav navbar-nav navbar-right" data-tabs="tabs">
 				        <li id="statistics-tab" class="active"><a href="#Statistics" data-toggle="tab">Statistics</a></li>
 				        <li><a href="#Items" data-toggle="tab">Items</a></li>
 				        <li><a href="#Notes" data-toggle="tab">Notes</a></li>
@@ -55,19 +56,27 @@
 
     <div id="app-body" class="container">
 
+    <div id="adventurer-name-input">
+		<div class="input-group" data-bind="visible: adventurer.isNameEditable">
+			<input class="form-control" 
+					placeholder="Click to add name"
+					data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
+			<span class="input-group-addon"
+				  data-bind="click: adventurer.isNameEditable(false)">Set</span>
+		</div>
+	</div>
+
     <div id="my-tab-content" class="tab-content">
 
         <div class="tab-pane active" id="Statistics">
         	<div class="row">
-				<div class="col-xs-4">
+				<div class="col-xs-3">
 					<h4>Statistics</h4>
 				</div>
-				<div class="col-xs-8 btn-group pull-right">
-					<button class="btn btn-default" data-bind="click: resetStats">Reset!</button>
-	        		<button class="btn btn-default" data-bind="click: startAdventure">Start!</button>	
-         	        <button class="btn btn-default" data-bind="">
-						<span>Try Luck</span>
-					</button>
+				<div class="col-xs-9 btn-group pull-right">
+					<button class="btn btn-default" data-bind="click: testLuck">Try Luck</button>	
+	        		<button class="btn btn-default" data-bind="click: startAdventure">Start</button>
+					<button class="btn btn-default" data-bind="click: resetStats">Reset</button>
         		</div>
 			</div>
 		    <div class="row" data-bind="foreach: adventurer.statistics">
@@ -215,7 +224,7 @@
 				 	<button class="btn btn-default" data-bind="click: this.editMonster">
 	            	Fight New Monster
 	            	</button>
-				<h3 data-bind="visible: function(){ return monsters.defeatedMonsters.length > 0; }">Defeated Monsters</h3>
+				<h3 data-bind="visible: monsters.defeatedMonsters().length">Defeated Monsters</h3>
 			    <ul class="list-group" data-bind="foreach: { data: monsters.defeatedMonsters, as: 'monster' }">
 					<li class="list-group-item">
 						<span data-bind="text: 'Name: ' + monster.name + ', '"></span>
@@ -246,7 +255,7 @@
 		   	<div id="fight-dialog" 
 		   		class="panel-body"
 		   		style="display: none;">
-		   		<h3>Fight: <span data-bind="text: fightResult"></span></h3>
+		   		<h3><span data-bind="text: fightResult"></span></h3>
 		   		<div class="row">
 		   			<div class="panel panel-default col-md-6">
 				   		<div class="panel-body">
@@ -267,7 +276,7 @@
 	            	<button class="btn btn-default" data-bind="click: function(){ attack(monsters.currentMonster, fightResult); }">Attack!</button>
 	            	<button class="btn btn-default" data-bind="click: function(){ escape(); }">Escape</button>
 	            	<button class="btn btn-default" data-bind="click: function(){ tryLuck(); }">Try Luck</button>
-	            	<button class="btn btn-default" data-bind="click: function(){ monsters.currentMonster.initialized(false); }">Cancel</button>
+	            	<button class="btn btn-default" data-bind="click: function(){ cancel(); }">Cancel</button>
 	            </div>
 		    </div>
 		</div>
@@ -283,7 +292,7 @@
 
     
 		<div id="statistics-summary">
-			<h4>Adventurer: <span data-bind="text: name"></span></h4>
+			<h4>Adventurer: <span data-bind="text: adventurer.name"></span></h4>
 			<div class="row">
 			<div class="col-md-3">
 

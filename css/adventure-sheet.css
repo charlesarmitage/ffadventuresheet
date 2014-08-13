@@ -12,6 +12,11 @@ b, p {
 	font-family: 'Architects Daughter', cursive;
 }
 
+
+i {
+	color: white;
+}
+
 label, button {
 	font-family: 'Architects Daughter', cursive;
 }
@@ -33,6 +38,10 @@ small, a {
 	font-size: 24px;
 }
 
+#adventurer-name-input {
+	padding: 10px;
+}
+
 #adventure-header {
 	background-color: rgb(205,133,63);
 }
@@ -47,12 +56,18 @@ small, a {
 	background-color: rgb(205,133,63);
 	border-radius: 0px;
 	border-width: 0px;
-	padding: 15px;
 	margin-bottom:0;
 }
 
 .navbar-toggle {
 	border-color: white;
+}
+
+.navbar-default .navbar-brand,
+.navbar-default .navbar-brand:hover {
+	font-family: 'Architects Daughter', cursive;
+	font-size: 30px;
+	color: white;
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -74,21 +89,26 @@ small, a {
 	background-color: rgb(228,191,146);	
 }
 
-i {
-	color: white;
-}
-
 .list-group-item, .stat-name, .panel, .panel-heading, .panel-default {
 	background-image: none;
 	background-color: rgb(228,191,146);
 	border-color: white;
 }
 
-.form-control {
+.form-control, .form-control:focus {
+	box-shadow:none !important;
 	background-color: rgb(228,191,146);
+	border-color: white;
 }
 
 .btn-default {
+	color: white;
+	background-image: none;
+	background-color: rgb(215,162,96);
+	border-color: white;
+}
+
+.input-group-addon {
 	color: white;
 	background-image: none;
 	background-color: rgb(215,162,96);

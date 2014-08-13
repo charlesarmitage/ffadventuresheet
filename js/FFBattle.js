@@ -54,9 +54,10 @@ var ffBattle = (function(ff){
 		} 
 
 		roundResult.isLuckUsed = true;
+		var currentLuck = adventurer.luck;
 		adventurer.luck -= 1;
 
-		if(adventurer.luck >= ff.dice.rollTwoDice().result){
+		if(currentLuck >= ff.dice.rollTwoDice().result){
 
 			if(roundResult.winner == 'Monster'){
 				adventurer.stamina += 1;

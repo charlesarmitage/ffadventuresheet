@@ -19,6 +19,7 @@ var AdventureSheetViewModel = (function() {
 	});
 
 	this.adventurer = ff.adventurer;
+	this.name = ko.observable("Dave");
 
 	ff.storage.connectListToStorage('defeatedMonsters', ff.monsters.defeatedMonsters);
 
@@ -56,12 +57,21 @@ var AdventureSheetViewModel = (function() {
 		});
 	};
 
-	this.tryLuck = function(){
-		ff.adventurer.tryLuck();
+	this.cancel = function(){
+		endBattle();
+	}
+
+	this.testLuck = function(){
+		var isLucky = ff.adventurer.testLuck();
+		if(isLucky){
+
+		} else {
+			
+		}
 	};
 
 	function endBattle(){
-		fightResult('Edit new monster');
+		fightResult('');
 		$('#defeated-monster-list').show('blind');
 		$('#monster-edit-dialog').hide('blind');
 	    $('#fight-dialog').hide('blind');
