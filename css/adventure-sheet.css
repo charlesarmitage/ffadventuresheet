@@ -1,25 +1,25 @@
+@font-face {
+    font-family: "AdventureFont";
+    src: url("../fonts/ArchitectsDaughter.ttf") format("truetype");   
+        /* Make sure you defined the correct path, which is related to
+            the location of your file `my_css.css` */ 
+}
+
 body {
 	background-color: rgb(228,191,146);
 	background-size: 100%;
 	border-color: white;
+	font-family: 'AdventureFont', cursive;
 	padding-top: 60px;
 }
 
 li, h1, h2, h3, h4, h5, h6 {
-	font-family: 'Architects Daughter', cursive;
-}
-
-b, p {
-	font-family: 'Architects Daughter', cursive;
+	font-family: 'AdventureFont', cursive;
 }
 
 
 i {
 	color: white;
-}
-
-label, button {
-	font-family: 'Architects Daughter', cursive;
 }
 
 small, a {
@@ -29,6 +29,10 @@ small, a {
 
 .form-control {
 	border-color: white;
+}
+
+#menu-btn {
+	border-width: 0px;
 }
 
 #app-body {
@@ -66,10 +70,12 @@ small, a {
 }
 
 .navbar-default .navbar-brand,
-.navbar-default .navbar-brand:hover {
-	font-family: 'Architects Daughter', cursive;
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus
+ {
 	font-size: 30px;
 	color: white;
+	background-color: rgb(205,133,63);
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -103,11 +109,22 @@ small, a {
 	border-color: white;
 }
 
-.btn-default {
+.btn-default,
+.btn-default:focus {
 	color: white;
 	background-image: none;
 	background-color: rgb(215,162,96);
 	border-color: white;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.42;
+  border-radius: 15px;
 }
 
 .input-group-addon {

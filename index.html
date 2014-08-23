@@ -6,7 +6,6 @@
 		<link rel="stylesheet" href="css/normalize.min.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/bootstrap-theme.min.css">
-		<link href='https://fonts.googleapis.com/css?family=Calligraffitti|Tangerine|Merienda+One|Rock+Salt|Architects+Daughter|Courgette' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="css/jquery-ui.min.css">
 		<link rel="stylesheet" href="css/adventure-sheet.css">
 	</head>
@@ -30,9 +29,11 @@
 						</span>
 	    			</span>
 
-    				<button type="button" class="navbar-toggle navbar-right navbar-btn" 
-    									  data-toggle="collapse" 
-    									  data-target="#bs-example-navbar-collapse-1">
+    				<button id="menu-btn"
+    						type="button"
+    						class="navbar-toggle navbar-left navbar-btn" 
+    						data-toggle="collapse" 
+    						data-target="#bs-example-navbar-collapse-1">
     				<span class="sr-only">Toggle navigation</span>
 			        <span class="icon-bar"></span>
 			        <span class="icon-bar"></span>
@@ -41,7 +42,7 @@
     			</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-	      			<ul class="nav navbar-nav navbar-right" data-tabs="tabs">
+	      			<ul class="nav navbar-nav navbar-left" data-tabs="tabs">
 				        <li id="statistics-tab" class="active"><a href="#Statistics" data-toggle="tab">Statistics</a></li>
 				        <li><a href="#Items" data-toggle="tab">Items</a></li>
 				        <li><a href="#Notes" data-toggle="tab">Notes</a></li>
@@ -139,12 +140,16 @@
 
 				    <div class="list-group" data-bind="foreach: ff.adventurer.equipmentItemsList">
 						<li class="list-group-item">
-							<span data-bind="text: $index"></span>
-							<span data-bind="text: $data"></span>
-							<button class="btn-sm btn-default pull-right"
-									data-bind="click: function(){ ff.adventurer.equipmentItemsList.splice($index, 1) }">
-								<i class="glyphicon glyphicon-remove"></i>
+							<button class="btn btn-default btn-circle">
+								<span class="glyphicon glyphicon-plus"></span>
 							</button>
+							<button class="btn btn-default btn-circle">
+								<span class="glyphicon glyphicon-minus"></span>
+							</button>
+							<span data-bind="text: $data"></span>
+							x <span>1</span>
+							<i class="glyphicon glyphicon-remove pull-right"
+								data-bind="click: function(){ ff.adventurer.equipmentItemsList.splice($index, 1) }"></i>
 						</li>
 					</div>
 				</div>
@@ -170,9 +175,8 @@
 						<li class="list-group-item">
 							<span data-bind="text: $index"></span>
 							<span data-bind="text: $data"></span>
-							<button class="pull-right" data-bind="click: function(){ ff.adventurer.treasureItemsList.splice($index, 1) }">
-								<i class="glyphicon glyphicon-remove"></i>
-							</button>
+							<i class="glyphicon glyphicon-remove pull-right"
+								data-bind="click: function(){ ff.adventurer.treasureItemsList.splice($index, 1) }"></i>
 						</li>
 					</div>
 				</div>
@@ -204,9 +208,8 @@
 						<li class="list-group-item">
 							<span data-bind="text: $index"></span>
 							<span data-bind="text: $data"></span>
-							<button class="pull-right" data-bind="click: function(){ ff.adventurer.notesList.splice($index, 1) }">
-								<i class="glyphicon glyphicon-remove"></i>
-							</button>
+							<i class="glyphicon glyphicon-remove pull-right"
+								data-bind="click: function(){ ff.adventurer.notesList.splice($index, 1) }"></i>
 						</li>
 					</div>
 				</div>
@@ -215,10 +218,17 @@
 				    <h3>Branch Number</h3>
 					<form role="form">
 					  <div class="form-group">
-					    <input 	type="number" 
-					    	   	class="form-control"
-					    	   	placeholder="1"
-					    	   	data-bind="value: ff.book.branch, valueUpdate:'afterkeydown'">
+						  <div class="input-group">
+						    <input 	type="number" 
+						    	   	class="form-control"
+						    	   	placeholder="1"
+						    	   	data-bind="value: ff.book.branch, valueUpdate:'afterkeydown'">
+				   	   	      <span class="input-group-btn">
+			    			    <button class="btn btn-default" type="button">
+			    			    	<span class="glyphicon glyphicon-ok"></span>
+			    			    </button>
+			      			  </span>
+		      			  </div>
 					  </div>
 					</form>
 				</div>
@@ -299,37 +309,30 @@
 			<button class="btn btn-default" data-bind="click: rollTwoDice()">Roll two dice</button>
         </div>
     </div>
-
     
-		<div id="statistics-summary">
-			<h4>Adventurer: <span data-bind="text: adventurer.name"></span></h4>
-			<div class="row">
-			<div class="col-md-3">
+	<div id="statistics-summary">
 
-			</div>
-			<h4>
-				<div class="ff-stats-bar">
-				<div class="stats-bar" data-bind="foreach: adventurer.statistics">
-				<div class="col-md-3">
-		   			<div class="panel panel-default">
-				   		<div class="panel-body">
-			            <span data-bind="text: name + ': ' + currentValue() + ' / ' + initialValue()"></span>
-			         	<div class="btn-group  btn-group-xs pull-right">
-	        			<button class="btn btn-default" data-bind="click: incrementStatistic">
-	        				<span class="glyphicon glyphicon-plus"></span>
-	        			</button>
-	        			<button class="btn btn-default" data-bind="click: decrementStatistic">
-	        				<span class="glyphicon glyphicon-minus"></span>
-	        			</button>
-	        		  </div>
-			            </div>
-		            </div>
-	            </div>
-	            </div>
-	            </div>
-            </h4>
-            </div>
-        </div>
+		<h4>Adventurer: <span data-bind="text: adventurer.name"></span></h4>
+
+	    <ul class="list-group" data-bind="foreach: adventurer.statistics">
+			<li class="list-group-item">
+			    <h4>
+			    <span data-bind="text: name + ': ' + currentValue() + ' / ' + initialValue()"></span>
+	         	<div class="btn-group pull-right">
+        			<button class="btn btn-default" data-bind="click: incrementStatistic">
+        				<span class="glyphicon glyphicon-plus"></span>
+        			</button>
+        			<button class="btn btn-default" data-bind="click: decrementStatistic">
+        				<span class="glyphicon glyphicon-minus"></span>
+        			</button>
+		  		</div>
+		  		</h4>
+			</li>
+		</ul>
+
+    </div>
+
+    </div>
 
 	<script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 	<script type='text/javascript' src='js/knockout-3.1.0.js'></script>

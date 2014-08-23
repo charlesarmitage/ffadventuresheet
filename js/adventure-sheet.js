@@ -126,6 +126,8 @@ var AdventureSheetViewModel = (function() {
 	}
 
 	this.resetStats = function() {
+		this.luckResult('');
+		cancelMonsterEdit();
 		ff.adventurer.reset();
 		ff.book.branch(0);
 	};		
