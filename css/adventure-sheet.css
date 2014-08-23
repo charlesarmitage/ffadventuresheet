@@ -70,12 +70,10 @@ small, a {
 }
 
 .navbar-default .navbar-brand,
-.navbar-default .navbar-brand:hover,
-.navbar-default .navbar-brand:focus
- {
+.navbar-default .navbar-brand:hover {
+	/*font-family: 'Architects Daughter', cursive;*/
 	font-size: 30px;
 	color: white;
-	background-color: rgb(205,133,63);
 }
 
 .navbar-default .navbar-nav>li>a {
@@ -109,8 +107,7 @@ small, a {
 	border-color: white;
 }
 
-.btn-default,
-.btn-default:focus {
+.btn-default {
 	color: white;
 	background-image: none;
 	background-color: rgb(215,162,96);

@@ -28,12 +28,29 @@ var ff = (function(ff){
 		});
 	}
 
+	function addNewItem(item){
+		return {
+			to : function (list){
+				item.count = item.count || 1;
+				item.count = ko.observable(item.count);
+				item.count.subscribe(function(newValue){
+					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+				});
+				list.push(item);
+			}
+		}		
+	}
+
 	ff.storage.connectListToStorage = function(listKey, list){
 		var storedList = localStorage.getItem(listKey) || "[]";
-		list(JSON.parse(storedList));
+		storedList = JSON.parse(storedList);
+
+		for (var i = 0; i < storedList.length; i++) {
+			addNewItem(storedList[i]).to(list);
+		};
 
 		list.subscribe(function(newValue){
-			localStorage.setItem(listKey, JSON.stringify(newValue));
+			localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
 		});
 
 		return list;

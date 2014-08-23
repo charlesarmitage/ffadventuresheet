@@ -104,10 +104,26 @@ var AdventureSheetViewModel = (function() {
 		return {
 			to : function(itemList){
 				if(newItem().length > 0){
-					itemList.unshift(newItem());
+					var item = {
+						name : newItem(),
+						count : ko.observable(1)
+					};
+					itemList.unshift(item);
 				}
 			}
 		};
+	};
+
+	this.incrementItem = function(list, index){
+		var item = list()[index];
+		item.count = item.count || ko.observable(1);
+		item.count(item.count() + 1);
+	}
+
+	this.decrementItem = function(list, index){
+		var item = list()[index];
+		item.count = item.count || ko.observable(1);
+		item.count(item.count() - 1);
 	}
 
 	this.incrementStatistic = function(statistic){
