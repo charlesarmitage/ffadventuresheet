@@ -48,6 +48,26 @@ var ffBattle = (function(ff){
 		return adventurer.stamina > 2;
 	};
 
+	function applyLuckSuccess(adventurer, monster, roundResult) {
+		if(roundResult.winner == 'Monster'){
+			adventurer.stamina += 1;
+		} else if(roundResult.winner == 'Adventurer'){
+			monster.stamina -= 2;
+		} else {
+			adventurer.luck += 1;
+		}		
+	}
+
+	function applyLuckFailure(adventurer, monster, roundResult) {
+		if(roundResult.winner == 'Monster'){
+			adventurer.stamina -= 1;
+		} else if(roundResult.winner == 'Adventurer'){
+			monster.stamina += 1;
+		} else {
+			adventurer.luck += 1;
+		}		
+	}
+
 	ffBattle.tryLuck = function(adventurer, monster, roundResult){
 		if(roundResult.isLuckUsed){
 			return;
@@ -58,14 +78,9 @@ var ffBattle = (function(ff){
 		adventurer.luck -= 1;
 
 		if(currentLuck >= ff.dice.rollTwoDice().result){
-
-			if(roundResult.winner == 'Monster'){
-				adventurer.stamina += 1;
-			} else if(roundResult.winner == 'Adventurer'){
-				monster.stamina -= 1;
-			} else {
-				adventurer.luck += 1;
-			}
+			applyLuckSuccess(adventurer, monster, roundResult);
+		} else {
+			applyLuckFailure(adventurer, monster, roundResult);
 		}
 	};
 

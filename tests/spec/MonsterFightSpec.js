@@ -164,7 +164,7 @@ Draw!');
     var result = ffBattle.fightRound(adventurer, monster);
     ffBattle.tryLuck(adventurer, monster, result);
 
-    expect(monster.stamina).toEqual(7);
+    expect(monster.stamina).toEqual(6);
     expect(adventurer.luck).toEqual(11);
   });
 
@@ -186,7 +186,33 @@ Draw!');
 
     expect(adventurer.stamina).toEqual(10);
     expect(adventurer.luck).toEqual(1);
-    expect(monster.stamina).toEqual(8);
+    expect(monster.stamina).toEqual(9);
+  });
+
+
+  it('should restore one stamina to monster when luck fails for an adventurer winning round', function(){
+    adventurer.skill += 2;
+    adventurer.luck = 2;
+
+    var result = ffBattle.fightRound(adventurer, monster);
+    ffBattle.tryLuck(adventurer, monster, result);
+
+    expect(adventurer.stamina).toEqual(10);
+    expect(adventurer.luck).toEqual(1);
+    expect(monster.stamina).toEqual(9);
+  });
+
+
+  it('should decrement adventurer stamina by one when luck fails for a monster winning round', function(){
+    adventurer.skill -= 2;
+    adventurer.luck = 2;
+
+    var result = ffBattle.fightRound(adventurer, monster);
+    ffBattle.tryLuck(adventurer, monster, result);
+
+    expect(adventurer.stamina).toEqual(7);
+    expect(adventurer.luck).toEqual(1);
+    expect(monster.stamina).toEqual(10);
   });
 
   it('should decrement luck when luck fails for a monster winning round', function(){
@@ -196,7 +222,7 @@ Draw!');
     var result = ffBattle.fightRound(adventurer, monster);
     ffBattle.tryLuck(adventurer, monster, result);
 
-    expect(adventurer.stamina).toEqual(8);
+    expect(adventurer.stamina).toEqual(7);
     expect(adventurer.luck).toEqual(1);
     expect(monster.stamina).toEqual(10);
   });
@@ -208,7 +234,7 @@ Draw!');
     ffBattle.tryLuck(adventurer, monster, result);
     ffBattle.tryLuck(adventurer, monster, result);
 
-    expect(monster.stamina).toEqual(7);
+    expect(monster.stamina).toEqual(6);
     expect(adventurer.luck).toEqual(11);
   });
 
@@ -229,7 +255,7 @@ Draw!');
     var result = ffBattle.escape(adventurer);
     ffBattle.tryLuck(adventurer, monster, result);
 
-    expect(adventurer.stamina).toEqual(8);
+    expect(adventurer.stamina).toEqual(7);
     expect(adventurer.luck).toEqual(1);
     expect(monster.stamina).toEqual(10);
   });
