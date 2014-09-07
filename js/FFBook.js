@@ -13,6 +13,11 @@
 		localStorage.setItem('branch', newValue);
 	});
 
+	ff.book.branch.reset = function(){
+		ff.book.branch(0);
+		localStorage.removeKey('branch');
+	}
+
 	ff.book.diceResult = ko.observable('...');
 
 }(ff));

@@ -16,6 +16,17 @@
 
   			<div class="container-fluid">
     			<div class="navbar-header">
+    				<button id="menu-btn"
+    						type="button"
+    						class="navbar-toggle navbar-left navbar-btn" 
+    						data-toggle="collapse" 
+    						data-target="#bs-example-navbar-collapse-1">
+    				<span class="sr-only">Toggle navigation</span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+			        <span class="icon-bar"></span>
+    				</button>
+
     				<span class="navbar-brand" data-bind="click: adventurer.editName">
 	    				<span>Name:</span>
 	    				<span id="adventurer-name"
@@ -28,17 +39,6 @@
 							Click to set
 						</span>
 	    			</span>
-
-    				<button id="menu-btn"
-    						type="button"
-    						class="navbar-toggle navbar-left navbar-btn" 
-    						data-toggle="collapse" 
-    						data-target="#bs-example-navbar-collapse-1">
-    				<span class="sr-only">Toggle navigation</span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-			        <span class="icon-bar"></span>
-    				</button>
     			</div>
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -76,8 +76,24 @@
 				</div>
 				<div class="col-xs-9 btn-group pull-right">
 					<button class="btn btn-default" data-bind="click: testLuck">Try Luck</button>	
-	        		<button class="btn btn-default" data-bind="click: startAdventure">Start</button>
-					<button class="btn btn-default" data-bind="click: resetStats">Reset</button>
+			        <div class="btn-group">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="battleDropdown" data-toggle="dropdown">
+					    Adventure
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="battleDropdown">
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" href="#" data-bind="click: startAdventure">
+					    	Start
+					    	</a>
+					    </li>
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" href="#" data-bind="click: resetStats">
+					    	Reset
+					    	</a>
+					    </li>
+					  </ul>
+					</div>
         		</div>
 			</div>
 
@@ -95,21 +111,27 @@
 		    	<div class="col-md-4">
 		        <div class="panel panel-default">
 					<div class="panel-body">
-			          <h4>
-			          	  <span data-bind="text: name"></span>
-				          <div class="btn-group pull-right">
-		        			<button class="btn btn-default" data-bind="click: incrementStatistic">
-		        				<span class="glyphicon glyphicon-plus"></span>
-		        			</button>
-		        			<button class="btn btn-default" data-bind="click: decrementStatistic">
-		        				<span class="glyphicon glyphicon-minus"></span>
-		        			</button>
-
-		        		  </div>			          	
-			          </h4>
-			          <p>Initial: <span data-bind="text: initialValue"></span></p>
-			          <h4>Current: <span data-bind="text: currentValue"></span></h4>
-
+		          	  <span id="stats-name" data-bind="text: name"></span>
+		          	  <h3>Current: <span data-bind="text: currentValue"></span>
+			          <div class="btn-group pull-right">
+	        			<button class="btn btn-default" data-bind="click: incrementStatistic">
+	        				<span class="glyphicon glyphicon-plus"></span>
+	        			</button>
+	        			<button class="btn btn-default" data-bind="click: decrementStatistic">
+	        				<span class="glyphicon glyphicon-minus"></span>
+	        			</button>
+	        		  </div>
+			          </h3>
+			          <h3>Initial: <span data-bind="text: initialValue"></span>
+			          <div class="btn-group pull-right">
+			          	<button class="btn btn-default" data-bind="click: incrementInitialStatistic">
+	        				<span class="glyphicon glyphicon-plus"></span>
+	        			</button>
+	        			<button class="btn btn-default" data-bind="click: decrementInitialStatistic">
+	        				<span class="glyphicon glyphicon-minus"></span>
+	        			</button>
+	        		  </div>
+			          </h3>
 					</div>
 				</div>
 				</div>
@@ -278,8 +300,10 @@
 	            <span>Stamina: </span>
 	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.stamina.currentValue" />
 	            </b>
-	            <button class="btn btn-default" data-bind="click: this.fightMonster">Start</button>
-	            <button class="btn btn-default" data-bind="click: this.cancelMonsterEdit">Cancel</button>
+	            <div class="btn-group">
+	            	<button class="btn btn-default" data-bind="click: this.fightMonster">Start</button>
+	            	<button class="btn btn-default" data-bind="click: this.cancelMonsterEdit">Cancel</button>
+	            </div>
 		    </div>
 		   	<div id="fight-dialog" 
 		   		class="panel-body"
@@ -301,14 +325,40 @@
 			            </div>
 		            </div>
 	            </div>
+
 	            <div class="btn-group">
 	            	<button class="btn btn-default" data-bind="click: function(){ attack(monsters.currentMonster, fightResult); }">Attack!</button>
-	            	<button class="btn btn-default" data-bind="click: function(){ escape(); }">Escape</button>
 	            	<button class="btn btn-default" data-bind="click: function(){ tryLuck(); }">Try Luck</button>
-	            	<button class="btn btn-default" data-bind="click: function(){ cancel(); }">Cancel</button>
+			        <div class="btn-group">
+					  <button class="btn btn-default dropdown-toggle" type="button" id="battleDropdown" data-toggle="dropdown">
+					    Other
+					    <span class="caret"></span>
+					  </button>
+					  <ul class="dropdown-menu" role="menu" aria-labelledby="battleDropdown">
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" href="#" data-bind="click: function(){ escape(); }">
+					    	Escape
+					    	</a>
+					    </li>
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" href="#" data-bind="click: function(){ cancel(); }">
+					    	End Battle Early
+					    	</a>
+					    </li>
+					    <li role="presentation">
+					    	<a role="menuitem" tabindex="-1" href="#" data-bind="click: function(){ cancel(); }">
+					    	Cancel Battle
+					    	</a>
+					    </li>
+					  </ul>
+					</div>
 	            </div>
 		    </div>
 		</div>
+
+
+
+
 
         </div>
 

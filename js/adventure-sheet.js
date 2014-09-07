@@ -134,6 +134,14 @@ var AdventureSheetViewModel = (function() {
 		statistic.decrement();
 	};
 
+	this.incrementInitialStatistic = function(statistic){
+		statistic.incrementInitial();
+	};
+
+	this.decrementInitialStatistic = function(statistic){
+		statistic.decrementInitial();
+	};
+
 	this.startAdventure = function() {
 		for(var index in ff.adventurer.statistics){
 			ff.adventurer.statistics[index].initialValue(ff.adventurer.statistics[index].currentValue());
@@ -145,6 +153,7 @@ var AdventureSheetViewModel = (function() {
 		this.luckResult('');
 		cancelMonsterEdit();
 		ff.adventurer.reset();
+		ff.storage.resetList('defeatedMonsters', ff.monsters.defeatedMonsters);
 		ff.book.branch(0);
 	};		
 }());

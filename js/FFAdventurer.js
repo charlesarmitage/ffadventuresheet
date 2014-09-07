@@ -21,6 +21,13 @@ var ff = (function(ff){
 		localStorage.setItem("current" + statistic.name, statistic.currentValue());
 	};
 
+	ff.storage.remove = function(statistic){
+		console.log("Removing: " + statistic.name);
+
+		localStorage.removeItem("initial" + statistic.name);
+		localStorage.removeItem("current" + statistic.name);	
+	}
+
 	function subscribeToStatistic(statistic){
 		console.log("Subscribing: " + statistic.name);
 		statistic.currentValue.subscribe(function(newValue){
@@ -54,6 +61,11 @@ var ff = (function(ff){
 		});
 
 		return list;
+	}
+
+	ff.storage.resetList = function(listKey, list){
+		list.removeAll();
+		localStorage.removeItem(listKey);
 	}
 
 	function initialize(adventurer){
@@ -95,11 +107,16 @@ var ff = (function(ff){
 
 	adventurer.reset = function(){
 		for(var statistic in adventurer.statistics){
+			var stat = adventurer.statistics[statistic];
 			adventurer.statistics[statistic].reset();
+			ff.storage.remove(stat);
 		}
 		ff.adventurer.equipmentItemsList([]);
 		ff.adventurer.treasureItemsList([]);
 		ff.adventurer.notesList([]);
+
+		ff.storage.resetList('equipmentItemsList', adventurer.equipmentItemsList);
+		ff.storage.resetList('treasureItemsList', adventurer.treasureItemsList);
 	};
 
 	adventurer.newEquipmentItem = ko.observable('');
