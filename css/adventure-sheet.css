@@ -1,8 +1,6 @@
 @font-face {
     font-family: "AdventureFont";
     src: url("../fonts/ArchitectsDaughter.ttf") format("truetype");   
-        /* Make sure you defined the correct path, which is related to
-            the location of your file `my_css.css` */ 
 }
 
 body {
@@ -10,13 +8,12 @@ body {
 	background-size: 100%;
 	border-color: white;
 	font-family: 'AdventureFont', cursive;
-	padding-top: 60px;
+	padding-top: 50px;
 }
 
 li, h1, h2, h3, h4, h5, h6 {
 	font-family: 'AdventureFont', cursive;
 }
-
 
 i {
 	color: white;
@@ -52,6 +49,10 @@ small, a {
 	background-color: rgb(205,133,63);
 }
 
+#stats-name {
+	font-size: 180%;
+}
+
 .subtext {
 	font-size: 65%;
 }
@@ -65,13 +66,18 @@ small, a {
 	margin-bottom:0;
 }
 
-.navbar-toggle {
+.navbar-toggle,
+.navbar-toggle:focus {
+	float : left;
+	background-color: rgb(205,133,63);
 	border-color: white;
+	padding-left: 0px;
+	margin-left: 0px;
 }
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover {
-	/*font-family: 'Architects Daughter', cursive;*/
+	float: left;
 	font-size: 30px;
 	color: white;
 }
@@ -112,6 +118,7 @@ small, a {
 	background-image: none;
 	background-color: rgb(215,162,96);
 	border-color: white;
+	font-weight: normal;
 }
 
 .btn-circle {
