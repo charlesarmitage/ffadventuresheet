@@ -21,7 +21,7 @@ var AdventureSheetViewModel = (function() {
 	this.adventurer = ff.adventurer;
 	this.name = ko.observable('');
 
-	ff.storage.connectListToStorage('defeatedMonsters', ff.monsters.defeatedMonsters);
+	ff.storage.connectListToStorage(ff.monsters.defeatedMonsters);
 
 	this.rollOneDie = function(){
 		ff.book.diceResult(ff.dice.rollOneDie().text);
@@ -106,9 +106,11 @@ var AdventureSheetViewModel = (function() {
 				if(newItem().length > 0){
 					var item = {
 						name : newItem(),
-						count : ko.observable(1)
+						count : ko.observable(1),
+						isEditable : ko.observable(false)
 					};
 					itemList.unshift(item);
+					item.isEditable(false);
 				}
 			}
 		};
@@ -153,7 +155,7 @@ var AdventureSheetViewModel = (function() {
 		this.luckResult('');
 		cancelMonsterEdit();
 		ff.adventurer.reset();
-		ff.storage.resetList('defeatedMonsters', ff.monsters.defeatedMonsters);
+		ff.storage.resetList(ff.monsters.defeatedMonsters);
 		ff.book.branch(0);
 	};		
 }());

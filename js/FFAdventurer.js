@@ -38,8 +38,19 @@ var ff = (function(ff){
 	function addNewItem(item){
 		return {
 			to : function (list){
-				item.count = item.count || 1;
-				item.count = ko.observable(item.count);
+				var listKey = list.listKey;
+
+				item.name = ko.observable(item.name || '?');
+				item.name.subscribe(function(newValue){
+						localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+				});				
+
+				item.isEditable = ko.observable(false);
+				item.isEditable.subscribe(function(newValue){
+					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+				});
+
+				item.count = ko.observable(item.count || 1);
 				item.count.subscribe(function(newValue){
 					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
 				});
@@ -48,7 +59,8 @@ var ff = (function(ff){
 		}		
 	}
 
-	ff.storage.connectListToStorage = function(listKey, list){
+	ff.storage.connectListToStorage = function(list){
+		var listKey = list.listKey;
 		var storedList = localStorage.getItem(listKey) || "[]";
 		storedList = JSON.parse(storedList);
 
@@ -63,9 +75,9 @@ var ff = (function(ff){
 		return list;
 	}
 
-	ff.storage.resetList = function(listKey, list){
+	ff.storage.resetList = function(list){
 		list.removeAll();
-		localStorage.removeItem(listKey);
+		localStorage.removeItem(list.listKey);
 	}
 
 	function initialize(adventurer){
@@ -115,21 +127,25 @@ var ff = (function(ff){
 		ff.adventurer.treasureItemsList([]);
 		ff.adventurer.notesList([]);
 
-		ff.storage.resetList('equipmentItemsList', adventurer.equipmentItemsList);
-		ff.storage.resetList('treasureItemsList', adventurer.treasureItemsList);
+		ff.storage.resetList(adventurer.equipmentItemsList);
+		ff.storage.resetList(adventurer.treasureItemsList);
+		ff.storage.resetList(adventurer.notesList);
 	};
 
 	adventurer.newEquipmentItem = ko.observable('');
 	adventurer.equipmentItemsList = ko.observableArray();
-	ff.storage.connectListToStorage('equipmentItemsList', adventurer.equipmentItemsList);
+	adventurer.equipmentItemsList.listKey = 'equipmentItemsList';
+	ff.storage.connectListToStorage(adventurer.equipmentItemsList);
 
 	adventurer.newTreasureItem = ko.observable('');
 	adventurer.treasureItemsList = ko.observableArray();
-	ff.storage.connectListToStorage('treasureItemsList', adventurer.treasureItemsList);
+	adventurer.treasureItemsList.listKey = 'treasureItemsList';
+	ff.storage.connectListToStorage(adventurer.treasureItemsList);
 
 	adventurer.newNote = ko.observable('');
 	adventurer.notesList = ko.observableArray();
-	ff.storage.connectListToStorage('notesList', adventurer.notesList);
+	adventurer.notesList.listKey = 'notesList';
+	ff.storage.connectListToStorage(adventurer.notesList);
 
 	adventurer.attack = function(monster, roundResponse){
 		adventurer.lastRoundResult = ffBattle.fightRound(adventurer.toPlainStats(), monster.toPlainStats());
