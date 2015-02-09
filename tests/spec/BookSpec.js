@@ -7,7 +7,7 @@ describe("Book details", function() {
       return store[key];
     });
     spyOn(localStorage, 'setItem').andCallFake(function (key, value) {
-      return store[key] = value + '';
+      store[key] = value + '';
     });
     spyOn(localStorage, 'clear').andCallFake(function () {
         store = {};

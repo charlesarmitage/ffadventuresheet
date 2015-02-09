@@ -94,12 +94,12 @@ var ffFormat = (function(){
 			winnerText = 'Draw!';
 		}
 
-		return 'Adventurer: ' 
-				+ result.adventurerResult.text + '\n'
-				+ 'Monster: ' 
-				+ result.monsterResult.text + '\n'
-				+ winnerText;
-	};
+		return 'Adventurer: ' +
+				result.adventurerResult.text + '\n' +
+				'Monster: ' +
+				result.monsterResult.text + '\n' +
+				winnerText;
+	}
 
 	return {
 		formatBattleRound : formatBattleRoundResult

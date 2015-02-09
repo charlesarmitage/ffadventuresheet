@@ -5,7 +5,7 @@ var ff = (function(ff){
 
 	function rollSingleDie(){
 		return Math.floor(Math.random() * 6) + 1;
-	};
+	}
 
 	var Roll = function(){
 		this.result = 0;
@@ -22,7 +22,7 @@ var ff = (function(ff){
 
 	function rollPlusModifierToText(roll, modifier){
 		return rollsToText(roll.rolls) + ' + ' + roll.modifier + ' = ' + roll.result;
-	};
+	}
 
 	function rollsToText(rolls){
 		var text = '';
@@ -33,7 +33,7 @@ var ff = (function(ff){
 			}
 		}
 		return text;
-	};
+	}
 
 	function toText(rolls, result){
 		var text = '';
@@ -41,7 +41,7 @@ var ff = (function(ff){
 			text = rollsToText(rolls);
 		}
 		return text + ' = ' + result;
-	};
+	}
 
 	function sumRolls(rolls){
 		var result = 0;
@@ -49,7 +49,7 @@ var ff = (function(ff){
 			result += rolls[i];
 		}
 		return result;
-	};
+	}
 
 	function rollDice(numberOfDice){
 		var roll = new Roll();
@@ -61,7 +61,7 @@ var ff = (function(ff){
 		roll.text = toText(roll.rolls, roll.result);
 
 		return roll;	
-	};
+	}
 
 	Dice.prototype.rollOneDie = function(){
 		return rollDice(1);

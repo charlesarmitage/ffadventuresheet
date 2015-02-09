@@ -17,7 +17,7 @@ var ff = (function(ff){
 
 	Statistic.prototype.incrementInitial = function () {
 		this.initialValue(parseInt(this.initialValue()) + 1);
-	}
+	};
 
 	Statistic.prototype.incrementValue = function(value) {
 		this.currentValue(parseInt(this.currentValue()) + value);
@@ -29,7 +29,7 @@ var ff = (function(ff){
 
 	Statistic.prototype.decrementInitial = function () {
 		this.initialValue(parseInt(this.initialValue()) - 1);
-	}
+	};
 
 	Statistic.prototype.decrementValue = function(value) {
 		this.currentValue(parseInt(this.currentValue()) - value);

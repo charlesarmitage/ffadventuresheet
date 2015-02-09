@@ -7,12 +7,12 @@ var ff = (function(ff){
 
 	function loadStat(stat) {
 		return parseInt(localStorage.getItem(stat) || 0);
-	};
+	}
 
 	function loadFromStorage(statistic){
 		statistic.initialValue(loadStat("initial" + statistic.name));
 		statistic.currentValue(loadStat("current" + statistic.name));
-	};
+	}
 
 	ff.storage.saveToStorage = function(statistic){
 		console.log("Stat changed: " + statistic.name + ", " + statistic.currentValue());
@@ -26,7 +26,7 @@ var ff = (function(ff){
 
 		localStorage.removeItem("initial" + statistic.name);
 		localStorage.removeItem("current" + statistic.name);	
-	}
+	};
 
 	function subscribeToStatistic(statistic){
 		console.log("Subscribing: " + statistic.name);
@@ -56,7 +56,7 @@ var ff = (function(ff){
 				});
 				list.push(item);
 			}
-		}		
+		};		
 	}
 
 	ff.storage.connectListToStorage = function(list){
@@ -66,19 +66,19 @@ var ff = (function(ff){
 
 		for (var i = 0; i < storedList.length; i++) {
 			addNewItem(storedList[i]).to(list);
-		};
+		}
 
 		list.subscribe(function(newValue){
 			localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
 		});
 
 		return list;
-	}
+	};
 
 	ff.storage.resetList = function(list){
 		list.removeAll();
 		localStorage.removeItem(list.listKey);
-	}
+	};
 
 	function initialize(adventurer){
 		adventurer.luck = new ff.Statistic('Luck');
@@ -94,16 +94,16 @@ var ff = (function(ff){
 		}
 
 		var storedName = localStorage.getItem('adventurerName');
-		if(storedName != null && storedName != 'undefined'){
+		if(storedName !== null && storedName != 'undefined'){
 			adventurer.name(storedName);
 		}
 
 		adventurer.isNameEditable = ko.observable(false);
 		return adventurer;
-	};
+	}
 
 	adventurer.editName = function() { 
-		adventurer.isNameEditable(true)
+		adventurer.isNameEditable(true);
 	};
 
 	adventurer.toPlainStats = function(){
@@ -177,7 +177,7 @@ var ff = (function(ff){
 		adventurer.luck.currentValue(currentLuck - 1);
 
 		return currentLuck >= ff.dice.rollTwoDice().result;
-	}
+	};
 
 	return ff;
 }(ff || {}));
