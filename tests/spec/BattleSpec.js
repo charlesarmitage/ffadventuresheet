@@ -1,7 +1,3 @@
-var ff = {};
-ff.dice = require('../../js/FFDice.js');
-ff.monsters = require('../../js/FFMonster.js');
-
 describe("BattleSpec", function() {
   var rollDice = ff.dice.rollTwoDice;
   var adventurer,  monster;
