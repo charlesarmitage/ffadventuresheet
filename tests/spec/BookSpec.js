@@ -6,10 +6,10 @@ describe("Book details", function() {
     spyOn(localStorage, 'getItem').and.callFake(function (key) {
       return store[key];
     });
-    spyOn(localStorage, 'setItem').andCallFake(function (key, value) {
-      store[key] = value + '';
+    spyOn(localStorage, 'setItem').and.callFake(function (key, value) {
+      store[key] = value;
     });
-    spyOn(localStorage, 'clear').andCallFake(function () {
+    spyOn(localStorage, 'clear').and.callFake(function () {
         store = {};
     });
   });
@@ -18,8 +18,8 @@ describe("Book details", function() {
   });
 
   it('should save numbers to local storage', function() {
-    ff.book.number(102);
+    ff.book.branch(102);
 
-    expect(ff.book.number()).toEqual(102);
+    expect(ff.book.branch()).toEqual(102);
   });
 });

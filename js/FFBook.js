@@ -1,4 +1,4 @@
-(function(ff){
+var ff = (function(ff){
 	ff.book = {};
 
 	function loadInt(name) {
@@ -19,5 +19,8 @@
 	};
 
 	ff.book.diceResult = ko.observable('...');
+	ff.book.number = ko.observable(1);
 
-}(ff));
+	return ff;
+
+}(ff || {}));
