@@ -85,7 +85,7 @@ var ffBattle = (function(ff){
 	};
 
 	return ffBattle;
-}(ff));
+}(ff || {}));
 
 var ffFormat = (function(){
 	function formatBattleRoundResult(result){
@@ -104,4 +104,4 @@ var ffFormat = (function(){
 	return {
 		formatBattleRound : formatBattleRoundResult
 	};
-}(ff));
+}(ffFormat || {}));
