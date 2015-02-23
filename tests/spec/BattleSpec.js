@@ -33,7 +33,7 @@ describe("BattleSpec", function() {
 
   function FightBattleRound(){
     adventurer.attack(viewModelMonster, function(roundResponse){});
-  };
+  }
 
   it("decrementing Adventurer stamina changes current value", function() {
       adventurer.stamina.decrementValue(2);

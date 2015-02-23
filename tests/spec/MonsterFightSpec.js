@@ -63,9 +63,9 @@ describe("Adventurer and Monster Fight", function() {
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 12 = 16\n\
-Monster: 1 + 3 + 10 = 14\n\
-Adventurer hits!');
+'Adventurer: 1 + 3 + 12 = 16\n' +
+'Monster: 1 + 3 + 10 = 14\n' +
+'Adventurer hits!');
   });
 
   it('should format monster wins result', function(){
@@ -75,9 +75,9 @@ Adventurer hits!');
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 10 = 14\n\
-Monster: 1 + 3 + 12 = 16\n\
-Monster hits!');
+'Adventurer: 1 + 3 + 10 = 14\n' +
+'Monster: 1 + 3 + 12 = 16\n' +
+'Monster hits!');
   });
 
 
@@ -87,9 +87,9 @@ Monster hits!');
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 10 = 14\n\
-Monster: 1 + 3 + 10 = 14\n\
-Draw!');
+'Adventurer: 1 + 3 + 10 = 14\n' +
+'Monster: 1 + 3 + 10 = 14\n' +
+'Draw!');
   });
 
   it('should callback monsterDefeated callback when monster defeated', function(){
@@ -109,7 +109,7 @@ Draw!');
   });
 
   it('should callback adventurer callback when adventurer defeated', function(){
-    monster.skill += 2
+    monster.skill += 2;
     adventurer.stamina = 2;
     var calledBack = false;
 

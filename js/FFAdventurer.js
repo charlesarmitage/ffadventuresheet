@@ -7,12 +7,12 @@ var ff = (function(ff){
 
 	function loadStat(stat) {
 		return parseInt(localStorage.getItem(stat) || 0);
-	};
+	}
 
 	function loadFromStorage(statistic){
 		statistic.initialValue(loadStat("initial" + statistic.name));
 		statistic.currentValue(loadStat("current" + statistic.name));
-	};
+	}
 
 	ff.storage.saveToStorage = function(statistic){
 		console.log("Stat changed: " + statistic.name + ", " + statistic.currentValue());
@@ -26,7 +26,7 @@ var ff = (function(ff){
 
 		localStorage.removeItem("initial" + statistic.name);
 		localStorage.removeItem("current" + statistic.name);	
-	}
+	};
 
 	function subscribeToStatistic(statistic){
 		console.log("Subscribing: " + statistic.name);
@@ -38,35 +38,47 @@ var ff = (function(ff){
 	function addNewItem(item){
 		return {
 			to : function (list){
-				item.count = item.count || 1;
-				item.count = ko.observable(item.count);
+				var listKey = list.listKey;
+
+				item.name = ko.observable(item.name || '?');
+				item.name.subscribe(function(newValue){
+						localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+				});				
+
+				item.isEditable = ko.observable(false);
+				item.isEditable.subscribe(function(newValue){
+					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+				});
+
+				item.count = ko.observable(item.count || 1);
 				item.count.subscribe(function(newValue){
 					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
 				});
 				list.push(item);
 			}
-		}		
+		};		
 	}
 
-	ff.storage.connectListToStorage = function(listKey, list){
+	ff.storage.connectListToStorage = function(list){
+		var listKey = list.listKey;
 		var storedList = localStorage.getItem(listKey) || "[]";
 		storedList = JSON.parse(storedList);
 
 		for (var i = 0; i < storedList.length; i++) {
 			addNewItem(storedList[i]).to(list);
-		};
+		}
 
 		list.subscribe(function(newValue){
 			localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
 		});
 
 		return list;
-	}
+	};
 
-	ff.storage.resetList = function(listKey, list){
+	ff.storage.resetList = function(list){
 		list.removeAll();
-		localStorage.removeItem(listKey);
-	}
+		localStorage.removeItem(list.listKey);
+	};
 
 	function initialize(adventurer){
 		adventurer.luck = new ff.Statistic('Luck');
@@ -82,16 +94,16 @@ var ff = (function(ff){
 		}
 
 		var storedName = localStorage.getItem('adventurerName');
-		if(storedName != null && storedName != 'undefined'){
+		if(storedName !== null && storedName != 'undefined'){
 			adventurer.name(storedName);
 		}
 
 		adventurer.isNameEditable = ko.observable(false);
 		return adventurer;
-	};
+	}
 
 	adventurer.editName = function() { 
-		adventurer.isNameEditable(true)
+		adventurer.isNameEditable(true);
 	};
 
 	adventurer.toPlainStats = function(){
@@ -115,21 +127,25 @@ var ff = (function(ff){
 		ff.adventurer.treasureItemsList([]);
 		ff.adventurer.notesList([]);
 
-		ff.storage.resetList('equipmentItemsList', adventurer.equipmentItemsList);
-		ff.storage.resetList('treasureItemsList', adventurer.treasureItemsList);
+		ff.storage.resetList(adventurer.equipmentItemsList);
+		ff.storage.resetList(adventurer.treasureItemsList);
+		ff.storage.resetList(adventurer.notesList);
 	};
 
 	adventurer.newEquipmentItem = ko.observable('');
 	adventurer.equipmentItemsList = ko.observableArray();
-	ff.storage.connectListToStorage('equipmentItemsList', adventurer.equipmentItemsList);
+	adventurer.equipmentItemsList.listKey = 'equipmentItemsList';
+	ff.storage.connectListToStorage(adventurer.equipmentItemsList);
 
 	adventurer.newTreasureItem = ko.observable('');
 	adventurer.treasureItemsList = ko.observableArray();
-	ff.storage.connectListToStorage('treasureItemsList', adventurer.treasureItemsList);
+	adventurer.treasureItemsList.listKey = 'treasureItemsList';
+	ff.storage.connectListToStorage(adventurer.treasureItemsList);
 
 	adventurer.newNote = ko.observable('');
 	adventurer.notesList = ko.observableArray();
-	ff.storage.connectListToStorage('notesList', adventurer.notesList);
+	adventurer.notesList.listKey = 'notesList';
+	ff.storage.connectListToStorage(adventurer.notesList);
 
 	adventurer.attack = function(monster, roundResponse){
 		adventurer.lastRoundResult = ffBattle.fightRound(adventurer.toPlainStats(), monster.toPlainStats());
@@ -161,7 +177,7 @@ var ff = (function(ff){
 		adventurer.luck.currentValue(currentLuck - 1);
 
 		return currentLuck >= ff.dice.rollTwoDice().result;
-	}
+	};
 
 	return ff;
 }(ff || {}));

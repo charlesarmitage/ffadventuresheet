@@ -85,7 +85,7 @@ var ffBattle = (function(ff){
 	};
 
 	return ffBattle;
-}(ff));
+}(ff || {}));
 
 var ffFormat = (function(){
 	function formatBattleRoundResult(result){
@@ -94,14 +94,14 @@ var ffFormat = (function(){
 			winnerText = 'Draw!';
 		}
 
-		return 'Adventurer: ' 
-				+ result.adventurerResult.text + '\n'
-				+ 'Monster: ' 
-				+ result.monsterResult.text + '\n'
-				+ winnerText;
-	};
+		return 'Adventurer: ' +
+				result.adventurerResult.text + '\n' +
+				'Monster: ' +
+				result.monsterResult.text + '\n' +
+				winnerText;
+	}
 
 	return {
 		formatBattleRound : formatBattleRoundResult
 	};
-}(ff));
+}(ffFormat || {}));
