@@ -124,6 +124,24 @@ describe("Adventurer and Monster Fight", function() {
     expect(calledBack).toEqual(true);
   });
 
+  it('should not reduce stamina below zero when adventurer loses', function(){
+    monster.skill += 2;
+    adventurer.stamina = 1;
+
+    ffBattle.fightRound(adventurer, monster);
+
+    expect(adventurer.stamina).toEqual(0);
+  });
+
+  it('should not reduce stamina below zero when monster loses', function(){
+    adventurer.skill += 2;
+    monster.stamina = 1;
+
+    ffBattle.fightRound(adventurer, monster);
+
+    expect(monster.stamina).toEqual(0);
+  });
+
   it('should minus 2 from adventurer stamina when escaping', function(){
     var result = ffBattle.escape(adventurer);
 
@@ -166,6 +184,17 @@ describe("Adventurer and Monster Fight", function() {
 
     expect(monster.stamina).toEqual(6);
     expect(adventurer.luck).toEqual(11);
+  });
+
+  it('should not decrement monster stamina below zero when adventurer wins round and successfully uses luck', function(){
+    adventurer.skill += 2;
+    monster.stamina = 2;
+    adventurer.luck = 12;
+
+    var result = ffBattle.fightRound(adventurer, monster);
+    ffBattle.tryLuck(adventurer, monster, result);
+
+    expect(monster.stamina).toEqual(0);
   });
 
   it('should not change statistics when luck tried for a draw', function(){
@@ -211,6 +240,20 @@ describe("Adventurer and Monster Fight", function() {
     ffBattle.tryLuck(adventurer, monster, result);
 
     expect(adventurer.stamina).toEqual(7);
+    expect(adventurer.luck).toEqual(1);
+    expect(monster.stamina).toEqual(10);
+  });
+
+
+  it('should not decrement stamina below zero when luck fails for a monster winning round', function(){
+    adventurer.skill -= 2;
+    adventurer.stamina = 2;
+    adventurer.luck = 2;
+
+    var result = ffBattle.fightRound(adventurer, monster);
+    ffBattle.tryLuck(adventurer, monster, result);
+
+    expect(adventurer.stamina).toEqual(0);
     expect(adventurer.luck).toEqual(1);
     expect(monster.stamina).toEqual(10);
   });

@@ -6,6 +6,12 @@ var ff = (function(ff){
 		this.initialValue = ko.observable(0);
 	};
 
+	function changeValueTo(statisticValue, newValue){
+		newValue = newValue >= 0 ? newValue : 0;
+
+		statisticValue(newValue);
+	}
+
 	Statistic.prototype.setInitialValue = function(value){
 		this.initialValue(value);
 		this.currentValue(value);
@@ -20,7 +26,7 @@ var ff = (function(ff){
 	}
 
 	Statistic.prototype.incrementValue = function(value) {
-		this.currentValue(parseInt(this.currentValue()) + value);
+		changeValueTo(this.currentValue, parseInt(this.currentValue()) + value);
 	};
 
 	Statistic.prototype.decrement = function () {
@@ -28,17 +34,11 @@ var ff = (function(ff){
 	};
 
 	Statistic.prototype.decrementInitial = function () {
-		var newValue = parseInt(this.initialValue()) - 1;
-		newValue = newValue >= 0 ? newValue : 0;
-
-		this.initialValue(newValue);
+		changeValueTo(this.initialValue, parseInt(this.initialValue()) - 1);
 	}
 
 	Statistic.prototype.decrementValue = function(value) {
-		var newValue = parseInt(this.currentValue()) - value;
-		newValue = newValue >= 0 ? newValue : 0;
-
-		this.currentValue(newValue);
+		changeValueTo(this.currentValue, parseInt(this.currentValue()) - value);
 	};
 
 	Statistic.prototype.reset = function(){
@@ -64,7 +64,7 @@ var ff = (function(ff){
     };
 
     Character.prototype.updateViewModel = function(character){
-    	this.stamina.currentValue(character.stamina);
+		changeValueTo(this.stamina.currentValue, character.stamina);
     };
 
     ff.Statistic = Statistic;

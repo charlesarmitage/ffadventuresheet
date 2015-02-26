@@ -2,6 +2,11 @@ var ffBattle = (function(ff){
 
 	var ffBattle = {};
 
+	function woundCombatant(combatant, numberOfWounds){
+		combatant.stamina -= numberOfWounds;
+		combatant.stamina = combatant.stamina < 0 ? 0 : combatant.stamina;
+	}
+
 	ffBattle.fightRound = function(adventurer, monster){
 	  var adventurerScore = ff.dice.rollTwoDice().add(adventurer.skill);
 	  var monsterScore = ff.dice.rollTwoDice().add(monster.skill);
@@ -9,10 +14,10 @@ var ffBattle = (function(ff){
 
 	  var roundWinner = 'Draw';
 	  if(adventurerScore.result > monsterScore.result){
-	    monster.stamina -= 2;
+	    woundCombatant(monster, 2);
 	    roundWinner = 'Adventurer';
 	  } else if(monsterScore.result > adventurerScore.result){
-	    adventurer.stamina -= 2;
+	    woundCombatant(adventurer, 2);
 	    roundWinner = 'Monster';
 	  }
 
@@ -52,7 +57,7 @@ var ffBattle = (function(ff){
 		if(roundResult.winner == 'Monster'){
 			adventurer.stamina += 1;
 		} else if(roundResult.winner == 'Adventurer'){
-			monster.stamina -= 2;
+	    	woundCombatant(monster, 2);
 		} else {
 			adventurer.luck += 1;
 		}		
@@ -60,7 +65,7 @@ var ffBattle = (function(ff){
 
 	function applyLuckFailure(adventurer, monster, roundResult) {
 		if(roundResult.winner == 'Monster'){
-			adventurer.stamina -= 1;
+			woundCombatant(adventurer, 1);
 		} else if(roundResult.winner == 'Adventurer'){
 			monster.stamina += 1;
 		} else {
