@@ -28,11 +28,17 @@ var ff = (function(ff){
 	};
 
 	Statistic.prototype.decrementInitial = function () {
-		this.initialValue(parseInt(this.initialValue()) - 1);
+		var newValue = parseInt(this.initialValue()) - 1;
+		newValue = newValue >= 0 ? newValue : 0;
+
+		this.initialValue(newValue);
 	}
 
 	Statistic.prototype.decrementValue = function(value) {
-		this.currentValue(parseInt(this.currentValue()) - value);
+		var newValue = parseInt(this.currentValue()) - value;
+		newValue = newValue >= 0 ? newValue : 0;
+
+		this.currentValue(newValue);
 	};
 
 	Statistic.prototype.reset = function(){
