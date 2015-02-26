@@ -146,7 +146,7 @@ var AdventureSheetViewModel = (function() {
 
 	this.startAdventure = function() {
 		for(var index in ff.adventurer.statistics){
-			ff.adventurer.statistics[index].initialValue(ff.adventurer.statistics[index].currentValue());
+			ff.adventurer.statistics[index].currentValue(ff.adventurer.statistics[index].initialValue());
 			ff.storage.saveToStorage(ff.adventurer.statistics[index]);
 		}		
 	}
