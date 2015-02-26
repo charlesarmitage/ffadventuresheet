@@ -65,6 +65,7 @@
     <icon src="res/icon/xxhdpi/ic_launcher.png"  gap:platform="android"    gap:qualifier="xxhdpi" />
 
     <!-- Define app splash screen for each platform. -->
+    <gap:splash src="splash.png" />
     <gap:splash src="res/screen/hdpi_screen.png"       gap:platform="android" gap:qualifier="port-hdpi" />
     <gap:splash src="res/screen/mdpi_screen.png"       gap:platform="android" gap:qualifier="port-mdpi" />
     <gap:splash src="res/screen/xhdpi_screen.png"      gap:platform="android" gap:qualifier="port-xhdpi" />
