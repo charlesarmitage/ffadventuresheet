@@ -18,6 +18,6 @@
 		localStorage.removeKey('branch');
 	}
 
-	ff.book.diceResult = ko.observable('...');
+	ff.book.diceResult = ko.observable('Click to roll dice');
 
 }(ff));
