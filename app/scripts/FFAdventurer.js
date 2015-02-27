@@ -1,6 +1,6 @@
 var ff = (function(ff){
 
-	var adventurer = Object.create(new ff.Character('...'));
+	var adventurer = Object.create(new ff.Character(''));
 	ff.adventurer = initialize(adventurer);
 
 	ff.storage = {};
