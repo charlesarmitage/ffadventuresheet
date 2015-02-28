@@ -1,23 +1,23 @@
 (function(ff){
 	ff.book = {};
 
-	function loadInt(name) {
-		if(localStorage.getItem(name) === null){
-			return 0;
+	function loadBranch() {
+		if(localStorage.getItem('branch') === null){
+			return 1;
 		}
-		return parseInt(localStorage.getItem(name));
+		return parseInt(localStorage.getItem('branch'));
 	};
 
-	ff.book.branch = ko.observable(loadInt('branch'));
+	ff.book.branch = ko.observable(loadBranch());
 	ff.book.branch.subscribe(function(newValue){
 		localStorage.setItem('branch', newValue);
 	});
 
 	ff.book.branch.reset = function(){
-		ff.book.branch(0);
+		ff.book.branch(1);
 		localStorage.removeKey('branch');
 	}
 
 	ff.book.diceResult = ko.observable('Click to roll dice');
 
-}(ff));
+}(ff || {}));

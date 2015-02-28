@@ -42,17 +42,16 @@ var ff = (function(ff){
 
 				item.name = ko.observable(item.name || '?');
 				item.name.subscribe(function(newValue){
-						localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+					var serializedList = JSON.stringify(ko.toJS(list));
+					localStorage.setItem(listKey, serializedList);
 				});				
 
 				item.isEditable = ko.observable(false);
-				item.isEditable.subscribe(function(newValue){
-					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
-				});
 
 				item.count = ko.observable(item.count || 1);
 				item.count.subscribe(function(newValue){
-					localStorage.setItem(listKey, JSON.stringify(ko.toJS(list)));
+					var serializedList = JSON.stringify(ko.toJS(list));
+					localStorage.setItem(listKey, serializedList);
 				});
 				list.push(item);
 			}
