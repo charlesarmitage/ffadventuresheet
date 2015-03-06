@@ -111,6 +111,7 @@ var AdventureSheetViewModel = (function() {
 					};
 					itemList.unshift(item);
 					item.isEditable(false);
+					newItem("");
 				}
 			}
 		};

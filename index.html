@@ -60,7 +60,9 @@
 					placeholder="Click to set name"
 					data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
 			<span class="input-group-addon"
-				  data-bind="click: adventurer.isNameEditable(false)">Set</span>
+				  data-bind="click: adventurer.isNameEditable(false)">
+				  <span class="glyphicon glyphicon-ok"></span>
+			</span>
 		</div>
 	</div>
 
@@ -142,15 +144,17 @@
 		      <div class="row">
 		        <div class="col-md-4">
 		          <h3>Equipment</h3>
-					<form role="form">
+					<form role="form" onsubmit="return false;">
 					  <div class="form-group">
 						  <div class="input-group">
 						    <input 	type="text" 
 						    	   	class="form-control"
 						    	   	placeholder=""
-						    	   	data-bind="value: ff.adventurer.newEquipmentItem">
+						    	   	data-bind="value: ff.adventurer.newEquipmentItem,
+						    	   				submit: function(){addItem(ff.adventurer.newEquipmentItem)
+			    			    						.to(ff.adventurer.equipmentItemsList)}">
 				   	   	      <span class="input-group-btn">
-			    			    <button class="btn btn-default" type="button" data-bind="click: addItem(ff.adventurer.newEquipmentItem)
+			    			    <button class="btn btn-default" type="submit" data-bind="click: addItem(ff.adventurer.newEquipmentItem)
 			    			    																.to(ff.adventurer.equipmentItemsList)">
 			    			    	<span class="glyphicon glyphicon-ok"></span>
 			    			    </button>
@@ -180,15 +184,17 @@
 
 		        <div class="col-md-4">
 		          <h3>Treasure</h3>
-					<form role="form">
+					<form role="form" onsubmit="return false;">
 					  <div class="form-group">
 						  <div class="input-group">
 						    <input 	type="text" 
 						    	   	class="form-control"
 						    	   	placeholder=""
-						    	   	data-bind="value: ff.adventurer.newTreasureItem">
+						    	   	data-bind="value: ff.adventurer.newTreasureItem,
+						    	   	submit: function(){addItem(ff.adventurer.newTreasureItem)
+			    			    						.to(ff.adventurer.treasureItemsList)}">
 				   	   	      <span class="input-group-btn">
-			    			    <button class="btn btn-default" type="button" data-bind="click: addItem(ff.adventurer.newTreasureItem)
+			    			    <button class="btn btn-default" type="submit" data-bind="click: addItem(ff.adventurer.newTreasureItem)
 			    			    																.to(ff.adventurer.treasureItemsList)">
 			    			    	<span class="glyphicon glyphicon-ok"></span>
 			    			    </button>
@@ -224,15 +230,17 @@
 		      <div class="row">
 		        <div class="col-md-4">
 		          <h3>Notes</h3>
-					<form role="form">
+					<form role="form" onsubmit="return false;">
 					  <div class="form-group">
 						  <div class="input-group">
 						    <input 	type="text" 
 						    	   	class="form-control"
 						    	   	placeholder=""
-						    	   	data-bind="value: ff.adventurer.newNote">
+						    	   	data-bind="value: ff.adventurer.newNote,
+						    	   				submit: function(){addItem(ff.adventurer.newTreasureItem)
+			    			    									.to(ff.adventurer.treasureItemsList)}">
 				   	   	      <span class="input-group-btn">
-			    			    <button class="btn btn-default" type="button" data-bind="click: addItem(ff.adventurer.newNote)
+			    			    <button class="btn btn-default" type="submit" data-bind="click: addItem(ff.adventurer.newNote)
 			    			    																.to(ff.adventurer.notesList)">			    			    	
 			    			    	<span class="glyphicon glyphicon-ok"></span>
 			    			    </button>
@@ -253,15 +261,16 @@
 
 				<div class="col-md-4">
 				    <h3>Branch Number</h3>
-					<form role="form">
+					<form role="form" onsubmit="return false;">
 					  <div class="form-group">
 						  <div class="input-group">
 						    <input 	type="number" 
 						    	   	class="form-control"
 						    	   	placeholder="1"
-						    	   	data-bind="value: ff.book.branch, valueUpdate:'afterkeydown'">
+						    	   	data-bind="value: ff.book.branch, 
+						    	   				valueUpdate:'afterkeydown'">
 				   	   	      <span class="input-group-btn">
-			    			    <button class="btn btn-default" type="button">
+			    			    <button class="btn btn-default" type="submit">
 			    			    	<span class="glyphicon glyphicon-ok"></span>
 			    			    </button>
 			      			  </span>
