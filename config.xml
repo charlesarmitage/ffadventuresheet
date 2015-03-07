@@ -6,10 +6,10 @@
         id        = "com.phonegap.helloworld"
         version   = "1.0.0">
 
-    <name>FF Adventure Sheet</name>
+    <name>Fantasy Adventure Sheet</name>
 
     <description>
-        Fighting Fantasy Adventure Sheet
+        Track your adventures - no pen & paper required!
     </description>
 
     <author href="http://github.com/charlesarmitage/ffadventuresheet" email="code@cjrarmitage.co.uk">
