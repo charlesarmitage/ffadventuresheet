@@ -1,22 +1,5 @@
 
 var AdventureSheetViewModel = (function() {
-	$('.nav a').on('click', function(){
-	    $(".btn-navbar").click(); //bootstrap 2.x
-	    $(".navbar-toggle").click() //bootstrap 3.x by Richard
-	});
-
-	$(document).ready(function(){
-		$('#statistics-summary').hide();
-	});
-
-	$(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
-	   var hash = e.target.hash;
-	   if(hash == '#Statistics'){
-			$('#statistics-summary').hide()
-		} else {
-			$('#statistics-summary').show()
-		}
-	});
 
 	this.adventurer = ff.adventurer;
 	this.name = ko.observable('');
