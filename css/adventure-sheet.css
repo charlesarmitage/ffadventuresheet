@@ -26,7 +26,7 @@ small, a {
 
 .form-control {
 	border-color: white;
-}
+} 
 
 #menu-btn {
 	border-width: 0px;
@@ -82,6 +82,13 @@ small, a {
 	color: white;
 }
 
+.navbar-default 
+.navbar-toggle:hover,
+.navbar-default
+.navbar-toggle:focus {
+	background-color: rgb(205,133,63);	
+}
+
 .navbar-default .navbar-nav>li>a {
 	color: white;
 }
@@ -118,6 +125,7 @@ small, a {
 	background-image: none;
 	background-color: rgb(215,162,96);
 	border-color: white;
+	border-width: 0px;
 	font-weight: normal;
 }
 

@@ -15,21 +15,16 @@ var ff = (function(ff){
 	};
 
 	ff.storage.saveToStorage = function(statistic){
-		console.log("Stat changed: " + statistic.name + ", " + statistic.currentValue());
-
 		localStorage.setItem("initial" + statistic.name, statistic.initialValue());
 		localStorage.setItem("current" + statistic.name, statistic.currentValue());
 	};
 
 	ff.storage.remove = function(statistic){
-		console.log("Removing: " + statistic.name);
-
 		localStorage.removeItem("initial" + statistic.name);
 		localStorage.removeItem("current" + statistic.name);	
 	}
 
 	function subscribeToStatistic(statistic){
-		console.log("Subscribing: " + statistic.name);
 		statistic.currentValue.subscribe(function(newValue){
 			ff.storage.saveToStorage(statistic);
 		});
