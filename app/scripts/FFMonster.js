@@ -12,12 +12,11 @@ var ff = (function(ff){
 		this.stamina.currentValue(parseInt(this.stamina.currentValue()));
 	};
 
-	var monstersViewModel = {
+	ff.monsters = {
 		currentMonster : new Monster('Unknown'),
 		defeatedMonsters : ko.observableArray()
 	};
-	monstersViewModel.defeatedMonsters.listKey = 'defeatedMonsters';
+	ff.monsters.defeatedMonsters.listKey = 'defeatedMonsters';
 
-	ff.monsters = monstersViewModel;
 	return ff;
 }(ff || {}));
