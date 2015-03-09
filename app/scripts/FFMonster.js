@@ -8,8 +8,6 @@ var ff = (function(ff){
 	Monster.prototype.constructor = Monster;
 
 	Monster.prototype.fight = function(){
-		console.log('Start attacking');
-
 		this.skill.currentValue(parseInt(this.skill.currentValue()));
 		this.stamina.currentValue(parseInt(this.stamina.currentValue()));
 	};
