@@ -8,11 +8,14 @@ var ff = (function(ff){
 	Monster.prototype.constructor = Monster;
 
 	Monster.prototype.fight = function(){
-		console.log('Start attacking');
-
-		this.skill.currentValue(parseInt(this.skill.currentValue()));
-		this.stamina.currentValue(parseInt(this.stamina.currentValue()));
+		var skill = parseInt(this.editableSkill());
+		this.skill.currentValue(skill);
+		var stamina = parseInt(this.editableStamina());
+		this.stamina.currentValue(stamina);
 	};
+
+	Monster.prototype.editableSkill = ko.observable("0");
+	Monster.prototype.editableStamina = ko.observable("0");
 
 	var monstersViewModel = {
 		currentMonster : new Monster('Unknown'),

@@ -297,8 +297,8 @@
 				<h3 data-bind="visible: monsters.defeatedMonsters().length">Defeated Monsters</h3>
 			    <ul class="list-group" data-bind="foreach: { data: monsters.defeatedMonsters, as: 'monster' }">
 					<li class="list-group-item">
-						<span data-bind="text: 'Name: ' + monster.name + ', '"></span>
-			        	<span>Skill: </span><span data-bind="text: monster.skill"></span>
+						<span data-bind="text: monster.name"></span>
+			        	<span>: Skill: </span><span data-bind="text: monster.skill"></span>
 			        	<span>Stamina: </span><span data-bind="text: monster.stamina"></span>
 						<i class="glyphicon glyphicon-remove pull-right"
 							data-bind="click: function(){ monsters.defeatedMonsters.splice($index, 1) }"></i>
@@ -314,9 +314,9 @@
 				<input class="form-control" placeholder="Optional Name"
 					data-bind="value: monsters.currentMonster.name" />
 	            <span>Skill:</span>
-	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.skill.currentValue" />
+	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.editableSkill" />
 	            <span>Stamina: </span>
-	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.stamina.currentValue" />
+	            <input class="form-control" type="number" data-bind="value: monsters.currentMonster.editableStamina" />
 	            </b>
 	            <div class="btn-group">
 	            	<button class="btn btn-default" data-bind="click: this.fightMonster">Start</button>
