@@ -58,15 +58,20 @@
     	</nav>
 
 	<div id="adventurer-name-input" class="container" data-bind="visible: adventurer.isNameEditable">
- 		<div class="input-group">
-			<input class="form-control" 
-					placeholder="Click to set name"
-					data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
-			<span class="input-group-addon"
-				  data-bind="click: adventurer.isNameEditable(false)">
-				  <span class="glyphicon glyphicon-ok"></span>
-			</span>
-		</div>
+
+		<form role="form" onsubmit="return false;">
+	 		<div class="input-group">
+				<input class="form-control"
+						type="text" 
+						placeholder="Click to set name"
+						data-bind="visible: adventurer.isNameEditable, value: adventurer.name, hasFocus: adventurer.isNameEditable" />
+				<span class="input-group-btn">
+				    <button class="btn btn-default" type="submit" data-bind="submit: function(){ adventurer.isNameEditable(false) }">
+				    	<span class="glyphicon glyphicon-ok"></span>
+				    </button>
+				</span>
+			</div>
+		</form>
 	</div>
 
     <div id="app-body" class="container">
