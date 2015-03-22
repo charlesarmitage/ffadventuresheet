@@ -14,6 +14,7 @@ var ff = (function(ff){
 		var skill = parseInt(this.editableSkill());
 		this.skill.currentValue(skill);
 		var stamina = parseInt(this.editableStamina());
+		this.stamina.initialValue(stamina);
 		this.stamina.currentValue(stamina);
 	};
 
