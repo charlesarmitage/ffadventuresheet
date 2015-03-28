@@ -69,7 +69,7 @@ var AdventureSheetViewModel = (function() {
 
 	this.monsters = ff.monsters;
 	this.fightMonster = function(){
-		fightResult('Battle started!')
+		fightResult('Battle started!<br><br><br>')
 		ff.monsters.currentMonster.fight();
 		$('#defeated-monster-list').hide('blind');
 		$('#monster-edit-dialog').hide('blind');
