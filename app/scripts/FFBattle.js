@@ -100,9 +100,9 @@ var ffFormat = (function(){
 		}
 
 		return 'Adventurer: ' 
-				+ result.adventurerResult.text + '\n'
+				+ result.adventurerResult.text + '<br>'
 				+ 'Monster: ' 
-				+ result.monsterResult.text + '\n'
+				+ result.monsterResult.text + '<br>'
 				+ winnerText;
 	};
 

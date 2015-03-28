@@ -63,8 +63,8 @@ describe("Adventurer and Monster Fight", function() {
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 12 = 16\n' +
-'Monster: 1 + 3 + 10 = 14\n' +
+'Adventurer: 1 + 3 + 12 = 16<br>' +
+'Monster: 1 + 3 + 10 = 14<br>' +
 'Adventurer hits!');
   });
 
@@ -75,8 +75,8 @@ describe("Adventurer and Monster Fight", function() {
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 10 = 14\n' +
-'Monster: 1 + 3 + 12 = 16\n' +
+'Adventurer: 1 + 3 + 10 = 14<br>' +
+'Monster: 1 + 3 + 12 = 16<br>' +
 'Monster hits!');
   });
 
@@ -87,8 +87,8 @@ describe("Adventurer and Monster Fight", function() {
 
     expect(ffFormat.formatBattleRound(result))
       .toEqual(
-'Adventurer: 1 + 3 + 10 = 14\n' +
-'Monster: 1 + 3 + 10 = 14\n' +
+'Adventurer: 1 + 3 + 10 = 14<br>' +
+'Monster: 1 + 3 + 10 = 14<br>' +
 'Draw!');
   });
 
