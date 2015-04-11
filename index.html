@@ -174,18 +174,17 @@
 				    <div class="list-group" data-bind="foreach: ff.adventurer.equipmentItemsList">
 						<li class="list-group-item">
 							<button class="btn btn-default btn-circle" 
-									data-bind="click: function(){ incrementItem(ff.adventurer.equipmentItemsList, $index()); }">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-							<button class="btn btn-default btn-circle" 
 									data-bind="click: function(){ decrementItem(ff.adventurer.equipmentItemsList, $index()); }">
 								<span class="glyphicon glyphicon-minus"></span>
 							</button>
-							<span data-bind="text: $data.name, visible: !$data.isEditable(), click: function(){ $data.isEditable(true); }"></span>
-							<input data-bind="value: $data.name, visible: $data.isEditable, hasFocus: $data.isEditable"/>
+							<button class="btn btn-default btn-circle" 
+									data-bind="click: function(){ incrementItem(ff.adventurer.equipmentItemsList, $index()); }">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+							<span data-bind="text: $data.name"></span>
 							x <span data-bind="text: $data.count"></span>
 							<i class="glyphicon glyphicon-remove pull-right"
-								data-bind="click: function(){ ff.adventurer.equipmentItemsList.splice($index, 1) }"></i>
+								data-bind="click: function(){ removeItem(ff.adventurer.equipmentItemsList, $index()); }"></i>
 						</li>
 					</div>
 				</div>
@@ -214,18 +213,17 @@
 				    <div class="list-group" data-bind="foreach: ff.adventurer.treasureItemsList">
 						<li class="list-group-item">
 							<button class="btn btn-default btn-circle" 
-									data-bind="click: function(){ incrementItem(ff.adventurer.treasureItemsList, $index()); }">
-								<span class="glyphicon glyphicon-plus"></span>
-							</button>
-							<button class="btn btn-default btn-circle" 
 									data-bind="click: function(){ decrementItem(ff.adventurer.treasureItemsList, $index()); }">
 								<span class="glyphicon glyphicon-minus"></span>
 							</button>
-							<span data-bind="text: $data.name, visible: !$data.isEditable(), click: function(){ $data.isEditable(true); }"></span>
-							<input data-bind="value: $data.name, visible: $data.isEditable, hasFocus: $data.isEditable"/>
+							<button class="btn btn-default btn-circle" 
+									data-bind="click: function(){ incrementItem(ff.adventurer.treasureItemsList, $index()); }">
+								<span class="glyphicon glyphicon-plus"></span>
+							</button>
+							<span data-bind="text: $data.name"></span>
 							x <span data-bind="text: $data.count"></span>
 							<i class="glyphicon glyphicon-remove pull-right"
-								data-bind="click: function(){ ff.adventurer.treasureItemsList.splice($index, 1) }"></i>
+								data-bind="click: function(){ removeItem(ff.adventurer.treasureItemsList, $index()); }"></i>
 						</li>
 					</div>
 				</div>
@@ -259,10 +257,9 @@
 
 				    <div class="list-group" data-bind="foreach: ff.adventurer.notesList">
 						<li class="list-group-item">
-							<span data-bind="text: $data.name, visible: !$data.isEditable(), click: function(){ $data.isEditable(true); }"></span>
-							<input data-bind="value: $data.name, visible: $data.isEditable, hasFocus: $data.isEditable"/>
+							<span data-bind="text: $data.name"></span>
 							<i class="glyphicon glyphicon-remove pull-right"
-								data-bind="click: function(){ ff.adventurer.notesList.splice($index, 1) }"></i>
+								data-bind="click: function(){ removeItem(ff.adventurer.notesList, $index()); }"></i>
 						</li>
 					</div>
 				</div>

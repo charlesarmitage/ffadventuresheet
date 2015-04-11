@@ -30,20 +30,19 @@ var ff = (function(ff){
 		});
 	}
 
-	function addNewItem(item){
+	function addNewItem(plainItem){
 		return {
 			to : function (list){
 				var listKey = list.listKey;
 
-				item.name = ko.observable(item.name || '?');
+				var item = {};
+				item.name = ko.observable(plainItem.name || '?');
 				item.name.subscribe(function(newValue){
 					var serializedList = JSON.stringify(ko.toJS(list));
 					localStorage.setItem(listKey, serializedList);
 				});				
 
-				item.isEditable = ko.observable(false);
-
-				item.count = ko.observable(item.count || 1);
+				item.count = ko.observable(plainItem.count || 1);
 				item.count.subscribe(function(newValue){
 					var serializedList = JSON.stringify(ko.toJS(list));
 					localStorage.setItem(listKey, serializedList);

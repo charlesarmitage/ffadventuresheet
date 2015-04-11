@@ -84,20 +84,28 @@ var AdventureSheetViewModel = (function() {
 	}
 
 	this.addItem = function(newItem){
+		var newItemName = newItem();
+
 		return {
 			to : function(itemList){
-				if(newItem().length > 0){
+				if(newItemName.length > 0){
 					var item = {
-						name : newItem(),
+						name : newItemName,
 						count : ko.observable(1),
-						isEditable : ko.observable(false)
 					};
 					itemList.unshift(item);
-					item.isEditable(false);
 					newItem("");
 				}
 			}
 		};
+	};
+
+	this.removeItem = function(itemList, index){
+		if(index == itemList.length - 1)
+		{
+			return itemList.splice(-1);
+		}
+		itemList.splice(index, 1);
 	};
 
 	this.incrementItem = function(list, index){
@@ -141,5 +149,6 @@ var AdventureSheetViewModel = (function() {
 		ff.adventurer.reset();
 		ff.storage.resetList(ff.monsters.defeatedMonsters);
 		ff.book.branch(0);
-	};		
+	};
+	
 }());
