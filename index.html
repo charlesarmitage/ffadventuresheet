@@ -301,8 +301,6 @@
 			    <ul class="list-group" data-bind="foreach: { data: monsters.defeatedMonsters, as: 'monster' }">
 					<li class="list-group-item">
 						<span data-bind="text: monster.name"></span>
-			        	<span>: Skill: </span><span data-bind="text: monster.skill"></span>
-			        	<span>Stamina: </span><span data-bind="text: monster.initialStamina"></span>
 						<i class="glyphicon glyphicon-remove pull-right"
 							data-bind="click: function(){ monsters.defeatedMonsters.splice($index, 1) }"></i>
 					</li>
