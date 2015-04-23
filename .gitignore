@@ -1,6 +1,11 @@
 # Dependency directory
 node_modules
 
+# Phonegap
+.cordova/
+platforms/
+plugins/
+
 # After running Phonegap www directory contains only built files
 # and shouldn't be edited directly
 www
