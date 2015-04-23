@@ -1,2 +1,6 @@
 # Dependency directory
 node_modules
+
+# After running Phonegap www directory contains only built files
+# and shouldn't be edited directly
+www
