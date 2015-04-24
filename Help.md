@@ -1,4 +1,4 @@
-# Help Text #
+# Help #
 
 ## Screens ##
 
